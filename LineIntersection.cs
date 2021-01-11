@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class linetest : MonoBehaviour
+public class LineIntersection : MonoBehaviour
 {
-    [SerializeField] Line a = default;
-    [SerializeField] Line b = default;    
+    [SerializeField] Line line1 = default;
+    [SerializeField] Line line2 = default;
     public void Update()
     {
-        Debug.DrawLine(a.start + a.Direction * 100f, a.start - a.Direction * 100f);
-        Debug.DrawLine(b.start + b.Direction * 100f, b.start - b.Direction * 100f);
-        Debug.Log("Intersection at " + Line.Intersection(a, b));
+        Debug.DrawLine(line1.a + line1.Direction * 100f, line1.a - line1.Direction * 100f);
+        Debug.DrawLine(line2.a + line2.Direction * 100f, line2.a - line2.Direction * 100f);
+        Debug.Log("Intersection at " + Line.Intersection(line1, line2));
     }
 
 }
@@ -17,8 +17,8 @@ public class linetest : MonoBehaviour
 [System.Serializable]
 public struct Line
 {
-    public Vector2 start;
-    public Vector2 end;
+    public Vector2 a;
+    public Vector2 b;
 
     public static Vector2 Intersection(Line a, Line b)
     {
@@ -29,13 +29,11 @@ public struct Line
             ) / ((a.DistanceX * b.DistanceY) - (a.DistanceY * b.DistanceX));
     }
 
-    public Vector2 Direction => end - start;
+    public Vector2 Direction => b - a;
 
-    float CrossProduct => start.x * end.y - start.y * end.x;
+    float CrossProduct => a.x * b.y - a.y * b.x;
 
-    float DistanceX => start.x - end.x;
+    float DistanceX => a.x - b.x;
 
-    float DistanceY => start.y - end.y;
-
-    
+    float DistanceY => a.y - b.y;
 }
