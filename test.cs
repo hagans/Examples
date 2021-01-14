@@ -13,7 +13,7 @@ public struct Vector3
     }
 }
 
-//puedes modificar los miembros
+//no puedes modificar los miembros
 public struct Vector3
 {
     public float x;
